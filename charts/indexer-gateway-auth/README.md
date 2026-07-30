@@ -1,6 +1,6 @@
 # indexer-gateway-auth Helm chart
 
-Deploys [`indexer-gateway-auth`](https://github.com/lodestar-team/indexer-gateway-auth),
+Deploys [`indexer-gateway-auth`](https://github.com/nightswatchhq/indexer-gateway-auth),
 an authenticating reverse proxy for the Graph Indexer Management API.
 
 ## Install
@@ -17,7 +17,7 @@ helm install iga ./charts/indexer-gateway-auth \
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `image.repository` | `ghcr.io/lodestar-team/indexer-gateway-auth` | Image repository |
+| `image.repository` | `ghcr.io/nightswatchhq/indexer-gateway-auth` | Image repository |
 | `image.tag` | `""` (chart appVersion) | Image tag |
 | `replicaCount` | `1` | Number of replicas |
 | `config` | see `values.yaml` | The `config.toml`, rendered into a ConfigMap |
