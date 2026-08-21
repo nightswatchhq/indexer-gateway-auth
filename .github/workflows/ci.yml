@@ -9,6 +9,9 @@ env:
   CARGO_TERM_COLOR: always
   RUSTFLAGS: "-D warnings"
 
+  # The commands CI runs live in yatr.toml, so `yatr ci` locally is the
+  # same gate. Bump deliberately.
+  YATR_VERSION: "1.1.0"
 jobs:
   test:
     name: fmt · clippy · test
@@ -24,14 +27,30 @@ jobs:
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
 
+      - name: Cache yatr
+        id: cache-yatr
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/yatr
+          key: yatr-${{ runner.os }}-${{ env.YATR_VERSION }}
+
+      - name: Install yatr
+        if: steps.cache-yatr.outputs.cache-hit != 'true'
+        # RUSTFLAGS is cleared deliberately: yatr is a different crate and must
+        # not inherit this project's flags (a `-D warnings` or a custom linker
+        # would fail or mislink the install).
+        run: cargo install yatr --version ${{ env.YATR_VERSION }} --locked
+        env:
+          RUSTFLAGS: ""
+
       - name: Format
-        run: cargo fmt --all -- --check
+        run: yatr fmt-check
 
       - name: Clippy
-        run: cargo clippy --all-targets --all-features
+        run: yatr lint
 
       - name: Test
-        run: cargo test --all-targets --locked
+        run: yatr test
 
   docker:
     name: docker build
