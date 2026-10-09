@@ -4,7 +4,7 @@
 # `yatr ci` locally is the same gate as CI. If you change a command here,
 # CI changes with it; the workflow calls these tasks by name.
 #
-# Task names match the rest of the nightswatchhq org. Note that the aggregate
+# Task names match the rest of the nuthatch-org org. Note that the aggregate
 # is `ci` and the type-check is `typecheck`: `yatr check` is a builtin that
 # validates this file and shadows any task of that name without warning.
 

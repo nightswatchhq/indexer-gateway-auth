@@ -23,7 +23,7 @@ RUN touch src/main.rs src/lib.rs \
 FROM gcr.io/distroless/cc-debian12:nonroot
 LABEL org.opencontainers.image.title="indexer-gateway-auth" \
       org.opencontainers.image.description="Authenticating reverse proxy for the Graph Indexer Management API" \
-      org.opencontainers.image.source="https://github.com/nightswatchhq/indexer-gateway-auth" \
+      org.opencontainers.image.source="https://github.com/nuthatch-org/indexer-gateway-auth" \
       org.opencontainers.image.licenses="Apache-2.0"
 
 COPY --from=builder /build/target/release/indexer-gateway-auth /usr/local/bin/indexer-gateway-auth
